@@ -1,0 +1,11 @@
+  - name: Find the total number of ports
+    set_fact:  
+      total: "{{ total | default([]) + [item | int] }}"
+    with_sequence: start=1000 end="10{{ inventory_hostname.split('-')[3].split('.')[0] }}" 
+
+  - name: Move the configuration file to the appropriate location and restart
+    template: src=../templates/config.yaml.j2 dest="./opt/{{application_name}}/config.yaml" mode=0644
+    notify: restart app
+      
+
+   

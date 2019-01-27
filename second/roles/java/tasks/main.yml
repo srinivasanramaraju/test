@@ -1,0 +1,6 @@
+ - name: Install OpenJDK
+   yum: name=java-{{ java_version }}-openjdk state=present
+   become: yes
+
+ - name: Copy Java environment setup template
+   template: src=env.j2 dest=/etc/profile.d/java.sh owner=tomcat group=tomcat mode=0755

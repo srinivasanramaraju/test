@@ -1,0 +1,7 @@
+############################# Application Config Yaml ######################################
+app.home.dir: "/opt/{{ application_name }}"
+app.environment: "{{ Environment }}"
+app.ports:
+{% for port in total -%}
+    - {{ port }}
+{% endfor -%}

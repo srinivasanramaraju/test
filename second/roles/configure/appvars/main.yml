@@ -1,0 +1,5 @@
+ansible-playbook -i ./servers.txt ./tasks/main.yml  --extra-vars "@defaults/main.yml"
+
+Environment: "dev"
+application_name: "abc-xyz"
+Deployment_ID: 12345

@@ -1,5 +1,0 @@
-app.home.dir: "/opt/app"
-app.environment: "qa"
-app.ports:
-- 1000
-- 1001

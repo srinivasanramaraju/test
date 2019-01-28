@@ -5,7 +5,7 @@ The solution for both first and second problem are written as individual roles a
 Below are the description of each role.
 
 1. configure - Parses input from servers.txt under *glassdoor hosts group* and configures the config.yaml (problem 1)
-2. Java - Install's the required version of Java, set's up the java service systemd file and places the secret
+2. Java - Install's the required version of Java and places the secret
 3. tomcat - Install's the  required version of the tomcat 
 4. deploy - Searches for the WAR file from nexus and places it the given application directory
 

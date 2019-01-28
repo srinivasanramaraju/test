@@ -4,7 +4,7 @@ nexus_version: 1.0.0-SNAPSHOT
 nexus_ext: war
 nexus_dest: /opt/
 nexus_url: http://nexus.foreseeresults.com:8081/nexus/service/local
-java_version: 7
+java_version: 1.8.0
 tomcat_version: 8
 Environment: "dev"
 application_name: "abc-xyz"

@@ -1,0 +1,13 @@
+
+[Unit]
+Description="{{ app_name }} java startup service"
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory={{ application_directory }}
+ExecStart=/usr/bin/java $JAVA_OPTS -jar {{ JAR_NAME }}
+Restart=always
+RestartSec=30
+StartLimitInterval=200
+StartLimitBurst=3

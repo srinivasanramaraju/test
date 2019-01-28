@@ -3,6 +3,9 @@
       total: "{{ total | default([]) + [item | int] }}"
     with_sequence: start=1000 end="10{{ inventory_hostname.split('-')[3].split('.')[0] }}" 
 
+  - name: Ensures /opt/{{ application_name }} dir exists
+    file: path="/opt/{{ application_name}}" state=directory  
+
   - name: Move the configuration file to the appropriate location and restart
     template: src=config.yaml.j2 dest="/opt/{{application_name}}/config.yaml" mode=0644
     notify: restart app

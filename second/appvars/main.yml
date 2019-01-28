@@ -2,12 +2,16 @@ nexus_group: com.answers.services
 nexus_name: acs-discovery
 nexus_version: 1.0.0-SNAPSHOT
 nexus_ext: war
-nexus_dest: /opt/
-nexus_url: http://nexus.foreseeresults.com:8081/nexus/service/local
+application_directory: /opt/
+nexus_url: 
 java_version: 1.8.0
 tomcat_version: 8
+http_port: 8080
+https_port: 443
+username: "abc"
+password: "xyz"
 Environment: "dev"
 application_name: "abc-xyz"
 Deployment_ID: 12345
-http_port: 8080
-https_port: 443
+admin_username: "abc"
+admin_password: "abc"

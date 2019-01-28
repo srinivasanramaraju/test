@@ -2,7 +2,7 @@
   connection: local
   gather_facts: yes
   roles:
-    - linux
     - java
     - tomcat
+    - deploy
     - configure

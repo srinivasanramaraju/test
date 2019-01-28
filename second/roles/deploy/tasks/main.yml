@@ -1,16 +1,16 @@
-- name: Fetch search results for {{ nexus_name }} {{ nexus_version }} in {{ nexus_group }}.
-  get_url: url="{{ nexus_url }}/lucene/search?g={{ nexus_group }}&a={{ nexus_name }}&v={{ nexus_version }}&e={{ nexus_ext }}" dest=/tmp/nexusSearch.xml force=yes
+  - name: Fetch search results for {{ nexus_name }} {{ nexus_version }} in {{ nexus_group }}.
+    get_url: url="{{ nexus_url }}/lucene/search?g={{ nexus_group }}&a={{ nexus_name }}&v={{ nexus_version }}&e={{ nexus_ext }}" dest=/tmp/nexusSearch.xml force=yes
 
-- name: Get Repository ID from search results.
-  xml: file=/tmp/nexusSearch.xml xpath=//data/artifact//repositoryId content=text
-  register: xml_rid
-  
-- name: Extract repository name from XML data.
-  set_fact:
-    nexus_repo: "{{ xml_rid.matches[0].repositoryId }}"
+  - name: Get Repository ID from search results.
+    xml: file=/tmp/nexusSearch.xml xpath=//data/artifact//repositoryId content=text
+    register: xml_rid
+        
+  - name: Extract repository name from XML data.
+    set_fact:
+      nexus_repo: "{{ xml_rid.matches[0].repositoryId }}"
 
-- name: Print repository.
-  debug: var=nexus_repo
-  
-- name: Fetching {{ nexus_name }} {{ nexus_version }} from {{ nexus_group }}.
-  get_url: url="{{ nexus_url }}/artifact/maven/redirect?r={{ nexus_repo }}&g={{ nexus_group }}&a={{ nexus_name }}&v={{ nexus_version }}&e={{ nexus_ext }}" dest="{{ nexus_dest }}" backup=yes force=yes
+  - name: Print repository.
+    debug: var=nexus_repo
+        
+  - name: Fetching {{ nexus_name }} {{ nexus_version }} from {{ nexus_group }}.
+    get_url: url="{{ nexus_url }}/artifact/maven/redirect?r={{ nexus_repo }}&g={{ nexus_group }}&a={{ nexus_name }}&v={{ nexus_version }}&e={{ nexus_ext }}" dest="{{ nexus_dest }}" backup=yes force=yes

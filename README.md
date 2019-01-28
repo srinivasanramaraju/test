@@ -9,7 +9,9 @@ Below are the description of each role.
 3. tomcat - Install's the  required version of the tomcat 
 4. deploy - Searches for the WAR file from nexus and places it the given application directory
 
-All the developer attributes and inputs for both the problems can be defined in `appvars/main.yml` or could be passed as --extra-vars
+All the developer attributes and inputs for both the problems can be defined in `appvars/main.yml` or could be passed as --extra-vars. Below are vars that are used and most of them are self explanatory.
+
+* `application_directory` - Web application deployment directory, nexus_group, nexus_name, nexus_version, nexus_ext: "war", nexus_url, java_version, tomcat_version, http_port: 8080, https_port: 443, username, password, Environment, application_name, Deployment_ID
 
 Note: As I'm unsure how the application reads the secrets, I have only restricted file permissions. I would prefer using ansible-vault for encryption based on application's usage.
 

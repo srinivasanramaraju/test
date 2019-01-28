@@ -7,10 +7,10 @@
       become_method: sudo
 
     - name: Download Tomcat
-      get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat.tar.gz
+      get_url: url="http://archive.apache.org/dist/tomcat/tomcat-{{ tomcat_versin.split('.')[0] }}/{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz" dest=/opt/apache-tomcat.tar.gz
 
     - name: Extract archive
-      command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat.tar.gz -C /opt/ creates=/opt/apache-tomcat
+      command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat.tar.gz -C /opt/apache-tomcat creates=/opt/apache-tomcat
 
     - name: Symlink install directory
       file: src=/opt/apache-tomcat path=/usr/share/tomcat state=link
@@ -29,13 +29,15 @@
     - name: Install Tomcat init script
       copy: src=tomcat-init.sh dest=/etc/init.d/tomcat mode=0755
 
+    - name: Copy unit file in place
+      template: >-
+        src=tomcat-service.j2
+        dest=/etc/systemd/system/tomcat.service
+        mode=0664
+     
+    - name: Reload systemd
+      shell: /usr/bin/systemctl daemon-reload 
+
     - name: Start Tomcat
       service: name=tomcat state=started enabled=yes
 
-    - name: deploy iptables rules
-      template: src=iptables dest=/etc/sysconfig/iptables
-      when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version == '6'"
-      notify: restart iptables
-
-    - name:  wait for tomcat to start
-      wait_for: port={{http_port}}
